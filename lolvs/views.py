@@ -3,10 +3,10 @@ from django.shortcuts import render
 # Create your views here.
 
 
-def base(requests):
+def index(requests):
     context = {}
 
-    return render(requests, "lolvs/base.html", context=context)
+    return render(requests, "lolvs/index.html", context=context)
     # return render(requests, "index.html", context=context)
 
 

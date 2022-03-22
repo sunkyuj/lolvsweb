@@ -18,8 +18,8 @@ from django.urls import path, include
 from lolvs import views
 
 urlpatterns = [
-    path("", views.base),
-    path("base.html", views.base),
+    path("", views.index),
+    path("index.html", views.index),
     path("/search", views.search),
     # path("create/", views.create),
     # path("read/<id>/", views.read),
