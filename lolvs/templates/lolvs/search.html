@@ -4,12 +4,12 @@
     <!--<form class="w-100 me-3" action="{% url 'search' %}" method="POST">-->
     <form
       class="w-100 me-3"
-      action="#"
+      id="form"
       onsubmit="clickSearchButton()"
       method="POST"
     >
       {% csrf_token %}
-      <div class="d-flex px-5 mx-5">
+      <div class="d-flex px-5 mx-5 form-group">
         <!-- my champ -->
         <div class="input-group mx-2">
           <span class="input-group-text">내 챔피언</span>
@@ -34,7 +34,7 @@
             class="form-control"
             size="50"
           />
-          <button class="btn btn-primary" type="submit" id="button-addon2">
+          <button class="btn btn-primary" type="submit" id="search_button">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="16"
@@ -54,19 +54,44 @@
   </div>
 
   <div class="d-flex container justify-content-center pt-3 vstip">
-    <a
-      href="#"
-      class="d-none d-sm-inline btn btn-md ml-4 btn-primary shadow-sm"
-    >
+    <a class="d-none d-sm-inline btn btn-md ml-4 btn-primary shadow-sm">
+      <!-- 모달 추가해야함 -->
       <i class="fas fa-sm text-white-50"></i>VS Tip
     </a>
   </div>
 </div>
 
+<script src="//code.jquery.com/jquery.min.js"></script>
+
 <script type="text/javascript">
-  function clickSearchButton() {
-    var myChampion = document.getElementById("myChampion").value;
-    var enemyChampion = document.getElementById("enemyChampion").value;
-    alert(myChampion + enemyChampion);
-  }
+  $("#search_button").click(function () {
+    alert("submitted");
+    $.ajax({
+      type: "GET", // 전송방식
+      url: "/masters_crawler.py",
+      data: {}, // 전송 파라미터
+      dataType: "json", // 받아올 데이터타입 (json, html, xml ...)
+      error: function () {
+        alert("error!");
+      },
+    }).done(function (o) {
+      // do something
+      alert("asd");
+    });
+  });
+  /*
+    function clickSearchButton() {
+      var myChampion = document.getElementById("myChampion").value;
+      var enemyChampion = document.getElementById("enemyChampion").value;
+
+      $.ajax({
+        type: "GET", // 전송방식
+        url: "~/masters_crawler.py",
+        data: {}, // 전송 파라미터
+        dataType: "json", // 받아올 데이터타입 (json, html, xml ...)
+      }).done(function (o) {
+        // do something
+        alert(o);
+      });
+    }*/
 </script>
