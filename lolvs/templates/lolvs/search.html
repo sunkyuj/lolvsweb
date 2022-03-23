@@ -2,7 +2,12 @@
   <div class="d-flex align-items-center">
     <!-- vs search form -->
     <!--<form class="w-100 me-3" action="{% url 'search' %}" method="POST">-->
-    <form class="w-100 me-3" action="#" method="POST">
+    <form
+      class="w-100 me-3"
+      action="#"
+      onsubmit="clickSearchButton()"
+      method="POST"
+    >
       {% csrf_token %}
       <div class="d-flex px-5 mx-5">
         <!-- my champ -->
@@ -11,6 +16,7 @@
           <input
             type="text"
             name="myChampion"
+            id="myChampion"
             aria-label="my champion"
             class="form-control"
             size="50"
@@ -23,6 +29,7 @@
           <input
             type="text"
             name="enemyChampion"
+            id="enemyChampion"
             aria-label="enemy champion"
             class="form-control"
             size="50"
@@ -55,3 +62,11 @@
     </a>
   </div>
 </div>
+
+<script type="text/javascript">
+  function clickSearchButton() {
+    var myChampion = document.getElementById("myChampion").value;
+    var enemyChampion = document.getElementById("enemyChampion").value;
+    alert(myChampion + enemyChampion);
+  }
+</script>
