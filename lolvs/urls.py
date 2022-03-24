@@ -19,8 +19,10 @@ from lolvs import views
 
 urlpatterns = [
     path("", views.index),
-    path("index.html", views.index),
-    path("/search", views.search),
+    path("index.html", views.index,name="index"),
+    path("search", views.search,name="search"),
+    path("viewjson", views.viewJson,name="viewjson"),
+    path('crawlmaster/',views.crawlMaster,name="crawlmaster"),
     # path("create/", views.create),
     # path("read/<id>/", views.read),
     # path("delete/", views.delete),

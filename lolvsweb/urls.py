@@ -21,7 +21,9 @@ from lolvs import views
 urlpatterns = [
     # 다른 URL 패턴을 포함할 때마다 항상 include()를 사용해야 합니다. admin.site.urls가 유일한 예외입니다.
     path("admin/", admin.site.urls),
-    path("", include("lolvs.urls")),
-    path("lolvs/", include("lolvs.urls")),
+    path("", views.index),
+    path("lolvs/", views.index),
     path("search/", views.search, name="search"),
+    path('viewjson/',views.viewJson),
+    path('crawlmaster/',views.crawlMaster),
 ]

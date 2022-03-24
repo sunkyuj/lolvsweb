@@ -49,6 +49,7 @@ ALLOWED_HOSTS = []
 INSTALLED_APPS = [
     "lolvs",
     "bootstrap4",
+    'rest_framework',   
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",

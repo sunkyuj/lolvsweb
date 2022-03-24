@@ -2,12 +2,7 @@
   <div class="d-flex align-items-center">
     <!-- vs search form -->
     <!--<form class="w-100 me-3" action="{% url 'search' %}" method="POST">-->
-    <form
-      class="w-100 me-3"
-      id="form"
-      onsubmit="clickSearchButton()"
-      method="POST"
-    >
+    <form class="w-100 me-3" method="POST">
       {% csrf_token %}
       <div class="d-flex px-5 mx-5 form-group">
         <!-- my champ -->
@@ -61,37 +56,27 @@
   </div>
 </div>
 
-<script src="//code.jquery.com/jquery.min.js"></script>
+<!--<script src="//code.jquery.com/jquery.min.js"></script> -->
 
 <script type="text/javascript">
-  $("#search_button").click(function () {
-    alert("submitted");
+  $("form").submit(function (e) {
+    e.preventDefault(); // 새로고침 방지
+    var myChampion = document.getElementById("myChampion").value;
+    var enemyChampion = document.getElementById("enemyChampion").value;
     $.ajax({
       type: "GET", // 전송방식
-      url: "/masters_crawler.py",
-      data: {}, // 전송 파라미터
+      url: "/crawlmaster",
+      data: { myChampion: myChampion, enemyChampion: enemyChampion }, // 전송 파라미터
       dataType: "json", // 받아올 데이터타입 (json, html, xml ...)
       error: function () {
         alert("error!");
       },
-    }).done(function (o) {
-      // do something
-      alert("asd");
+      success: function (data) {
+        for (var i = 1; i <= 5; i++) {
+          alert(data[i]);
+          $(`#btnradio${i}_label`).text(data[i]);
+        }
+      },
     });
   });
-  /*
-    function clickSearchButton() {
-      var myChampion = document.getElementById("myChampion").value;
-      var enemyChampion = document.getElementById("enemyChampion").value;
-
-      $.ajax({
-        type: "GET", // 전송방식
-        url: "~/masters_crawler.py",
-        data: {}, // 전송 파라미터
-        dataType: "json", // 받아올 데이터타입 (json, html, xml ...)
-      }).done(function (o) {
-        // do something
-        alert(o);
-      });
-    }*/
 </script>
