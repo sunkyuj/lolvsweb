@@ -6,8 +6,12 @@ from rest_framework.decorators import api_view
 #from serializer import lolvs
 
 import chrome_auto_upgrade
+from fow_champion_id import champ_id
 
-
+# show: 웹 브라우저를 띄우지 않는 headless chrome 옵션 적용
+driver = chrome_auto_upgrade.get_driver(show_browser=False)
+# driver = webdriver.Chrome("chromedriver.exe", options=options)
+#driver.implicitly_wait(1)  # 로딩 완료되면 1초 기다리기
 
 # Create your views here.
 
@@ -40,16 +44,13 @@ def viewJson(requests):
     return JsonResponse({"myChampion":myChampion,"enemyChampion":enemyChampion})"""
 
 def crawlMaster(requests):
+
     
-    driver = chrome_auto_upgrade.get_driver(
-        show_browser=False,  # show: 웹 브라우저를 띄우지 않는 headless chrome 옵션 적용
-    )
-    # driver = webdriver.Chrome("chromedriver.exe", options=options)
-    #driver.implicitly_wait(1)  # 로딩 완료되면 1초 기다리기
+    myChampion = requests.GET["myChampion"]
+    enemyChampion = requests.GET["enemyChampion"] # vstip 을 위해서 필요
     
-    champ_id ='131'
     
-    url = f"http://fow.kr/champranking#{champ_id},30,cmd,p,S12"
+    url = f"http://fow.kr/champranking#{champ_id[myChampion]}"
     driver.get(url)  # op.gg <-- 여기가 엄청 오래걸림
     
     driver.execute_script('window.open("about:blank", "_blank");')  # new tab for lol.ps
